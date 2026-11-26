@@ -1,0 +1,6 @@
+{
+  "name": "Sa7",
+  "description": "Sa7 — শহরটা তোমার, গল্পটাও তোমার! Bangladesh Open-World 2D Isometric Adventure Game by Md Sazzad Hossain.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
