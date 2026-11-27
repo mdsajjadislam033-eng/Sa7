@@ -28,22 +28,29 @@ jobs:
           java-version: '21'
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps --no-audit --no-fund
+        run: |
+          npm install --legacy-peer-deps --no-audit --no-fund
+          npm install -g @capacitor/assets
 
       - name: Build web app
         run: npm run build
 
       - name: Configure and Add Capacitor Android
         run: |
-          # যদি capacitor.config ফাইল না থাকে, তবে একটি তৈরি করবে
           if [ ! -f "capacitor.config.json" ] && [ ! -f "capacitor.config.ts" ]; then
             echo '{"appId": "com.sa7.app", "appName": "Sa7", "webDir": "dist"}' > capacitor.config.json
           fi
-          
-          # পুরনো অ্যান্ড্রয়েড ফোল্ডার থাকলে তা মুছে নতুন করে তৈরি করবে
           rm -rf android
           npx cap add android
           npx cap sync android
+
+      - name: Update App Icon
+        run: |
+          if [ -f "android/app/src/main/res/mipmap-mdpi/icon.png" ]; then
+            mkdir -p resources
+            cp android/app/src/main/res/mipmap-mdpi/icon.png resources/icon.png
+            npx capacitor-assets generate --android
+          fi
 
       - name: Build Debug APK
         run: |
