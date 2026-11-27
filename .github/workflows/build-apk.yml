@@ -46,9 +46,10 @@ jobs:
 
       - name: Update App Icon
         run: |
-          if [ -f "android/app/src/main/res/mipmap-mdpi/icon.png" ]; then
+          # রুট ফোল্ডারে থাকা আইকনটিকে resources-এ নিয়ে জেনারেট করার কমান্ড
+          if [ -f "icon.png" ]; then
             mkdir -p resources
-            cp android/app/src/main/res/mipmap-mdpi/icon.png resources/icon.png
+            cp icon.png resources/icon.png
             npx capacitor-assets generate --android
           fi
 
